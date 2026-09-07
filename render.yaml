@@ -1,0 +1,36 @@
+services:
+  - type: web
+    name: iran-stock-telegram-bot
+    runtime: python
+    plan: free
+
+    buildCommand: pip install -r requirements.txt
+
+    startCommand: python bot.py
+
+    healthCheckPath: /health
+
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.13
+
+      - key: BOT_TOKEN
+        sync: false
+
+      - key: ADMIN_ID
+        sync: false
+
+      - key: DATABASE_PATH
+        value: stocks.db
+
+      - key: MARKET_REFRESH_SECONDS
+        value: 300
+
+      - key: SIGNAL_SCAN_SECONDS
+        value: 300
+
+      - key: APP_NAME
+        value: Iran Stock Analyzer
+
+      - key: TIMEZONE
+        value: Asia/Tehran
